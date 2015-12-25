@@ -180,7 +180,14 @@ public class Magnet implements View.OnTouchListener {
                         WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
                 PixelFormat.TRANSLUCENT
         );
-        mWindowManager.addView(icon, mLayoutParams = params);
+        
+        try {
+            mWindowManager.addView(icon, mLayoutParams = params);
+        } catch(Exception e) {
+            // ignore
+            // if targetSdkVersion >=23 addView maybe crash here.
+            // http://developer.android.com/intl/zh-cn/reference/android/Manifest.permission.html
+        }
     }
 
     protected void updateSize() {
